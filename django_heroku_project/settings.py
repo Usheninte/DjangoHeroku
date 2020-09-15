@@ -82,7 +82,9 @@ WSGI_APPLICATION = 'django_heroku_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if env('DEV_MODE'):
+DEV_MODE = env('DEV_MODE')
+
+if DEV_MODE:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

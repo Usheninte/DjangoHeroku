@@ -1,0 +1,23 @@
+body {
+    font-size: 16px;
+    padding: 1.5rem;
+}
+
+.title {
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-color: inherit;
+    margin-bottom: 2rem;
+}
+
+.form-base {
+    padding: 0 30%;
+}
+
+.field-pair {
+    margin: 1rem;
+}
+
+.field {
+    margin: 1rem 1rem 2rem 1rem;
+}

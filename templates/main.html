@@ -1,69 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contact Me!</title>
-    <!--  Bootstrap CSS  -->
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!--  Main Styling  -->
-    <style>
-        body {
-            font-size: 16px;
-            padding: 1.5rem;
-        }
+{% extends 'base.html' %}
 
-        .title {
-            text-align: center;
-            text-decoration: underline;
-            text-decoration-color: inherit;
-            margin-bottom: 2rem;
-        }
-
-        .form-base {
-            padding: 0 30%;
-        }
-
-        .field-pair {
-            margin: 1rem;
-        }
-
-        .field {
-            margin: 1rem 1rem 2rem 1rem;
-        }
-    </style>
-</head>
-<body>
+{% block content %}
     <h1 class="text-primary title">Contact Form</h1>
 
-    <form class="form-base" action="#" method="post">
+    <form class="form-base" action="{% url 'contact:home' %}" method="post">
+        {% csrf_token %}
         <div class="row">
             <div class="col field-pair">
                 <label>Email address</label>
-                <input type="text" class="form-control" placeholder="Email address">
+                {{ form.email }}
             </div>
             <div class="col field-pair">
                 <label>Full name</label>
-                <input type="text" class="form-control" placeholder="Full name">
+                {{ form.full_name }}
             </div>
         </div>
         <div class="field">
             <label>Subject</label>
-            <input type="text" class="form-control" placeholder="Subject">
+            {{ form.subject }}
         </div>
         <div class="field">
             <label>Message</label>
-            <textarea class="form-control" rows="3"
-                      placeholder="Hello, could I get more information on ..."></textarea>
+            {{ form.message }}
         </div>
         <div class="field">
             <button type="submit" class="btn btn-md btn-outline-primary">Submit</button>
         </div>
     </form>
-
-    <!--  Bootstrap JS  -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% endblock %}

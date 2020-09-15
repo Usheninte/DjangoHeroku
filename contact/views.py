@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.views.generic.edit import CreateView
+
+from .forms import ContactForm
+from .models import ContactInfo
 
 
-def homepage(request):
-    context = {}
-    return render(request, 'main.html', context)
+class ContactView(CreateView):
+    model = ContactInfo
+    form_class = ContactForm
+    template_name = 'main.html'

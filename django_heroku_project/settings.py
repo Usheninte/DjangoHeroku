@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'django_heroku_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DEV_MODE = env('DEV_MODE')
+DEV_MODE = env.bool('DEV_MODE', False)
 
 if DEV_MODE:
     DATABASES = {

@@ -95,15 +95,7 @@ else:
     DB_INFO = dj_database_url.config(default=os.environ["DATABASE_URL"])
 
     DATABASES = {
-        'default': {
-            'ENGINE': DB_INFO.ENGINE,
-            'NAME': DB_INFO.NAME,
-            'USER': DB_INFO.USER,
-            'PASSWORD': DB_INFO.PASSWORD,
-            'HOST': DB_INFO.HOST,
-            'PORT': DB_INFO.PORT,
-            'CONN_MAX_AGE': DB_INFO.CONN_MAX_AGE,
-        }
+        'default': DB_INFO
     }
 
 # Password validation

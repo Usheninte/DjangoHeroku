@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import environ
-import dj_database_url
 
 # Environment settings
 env = environ.Env(
@@ -92,13 +91,7 @@ if DEV_MODE:
         }
     }
 else:
-    DB_INFO = dj_database_url.config(default=env.db())
-
-    DATABASES = {
-        'default': {
-            'ENGINE': DB_INFO['ENGINE']
-        }
-    }
+    pass
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

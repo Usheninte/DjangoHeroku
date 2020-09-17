@@ -94,7 +94,7 @@ if DEV_MODE:
 else:
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.environ["DATABASE_URL"]
+            default=env.db()
         )
     }
 

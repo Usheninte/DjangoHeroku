@@ -92,13 +92,11 @@ if DEV_MODE:
         }
     }
 else:
-    DB_INFO = dj_database_url.parse(default=os.environ["DATABASE_URL"])
-
-    print("\n\n\n, DB_INFO (start) >>>,", DB_INFO, "\n\n\n, <<< DB_INFO (end) ")
-
-    # DATABASES = {
-    #     'default': DB_INFO
-    # }
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ["DATABASE_URL"]
+        )
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

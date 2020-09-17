@@ -92,11 +92,11 @@ if DEV_MODE:
         }
     }
 else:
+    DB_INFO = dj_database_url.config(default=env.db())
+
     DATABASES = {
         'default': {
-            'ENGINE': dj_database_url.config(
-                default=env.db()
-            )
+            'ENGINE': DB_INFO['ENGINE']
         }
     }
 

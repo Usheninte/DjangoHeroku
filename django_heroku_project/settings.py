@@ -93,9 +93,11 @@ if DEV_MODE:
     }
 else:
     DATABASES = {
-        'default': dj_database_url.config(
-            default=env.db()
-        )
+        'default': {
+            'ENGINE': dj_database_url.config(
+                default=env.db()
+            )
+        }
     }
 
 # Password validation

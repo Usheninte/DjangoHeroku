@@ -33,7 +33,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
-DEV_MODE = env('DEV_MODE')  # development config variable
+DEV_MODE = env('DEV_MODE', default=False)  # development config variable
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 

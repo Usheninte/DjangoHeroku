@@ -6,7 +6,7 @@ def django_heroku_db_url_postgres_parser(database_url):
         user_ += el  # add characters to user base variable
         if el == ':':
             break  # break at selected character
-    user = user_[:-1]  # get username from user base variable
+    user = user_[:-1]  # get user from user base variable
 
     user_gap = len(user_)
     db_url = db_url[user_gap:]  # reassign database url value to string minus username
@@ -23,30 +23,22 @@ def django_heroku_db_url_postgres_parser(database_url):
 
     host_ = ""  # initialize host base variable to empty string
     for el in db_url:  # iterate through trimmed database url
-        host_ += el  # add characters to password base variable
+        host_ += el  # add characters to host base variable
         if el == ':':
             break  # break at selected character
-    host = host_[:-1]  # get password from password base variable
+    host = host_[:-1]  # get host from host base variable
 
     host_gap = len(host_)
     db_url = db_url[host_gap:]  # reassign database url value to string minus host
 
     port_ = ""  # initialize port base variable to empty string
     for el in db_url:  # iterate through trimmed database url
-        port_ += el  # add characters to password base variable
+        port_ += el  # add characters to port base variable
         if el == '/':
             break  # break at selected character
-    port = port_[:-1]  # get password from password base variable
+    port = port_[:-1]  # get port from port base variable
 
     port_gap = len(port_)
-    db_name = db_url[port_gap:]  # database name value is the string of database value minus host port
+    db_name = db_url[port_gap:]  # database name value is the string of database value minus port
 
     return dict(user=user, password=password, host=host, port=port, name=db_name)
-
-
-dummy_db_url_1 = 'postgres://mydatabaseuser:mypassword@127.0.0.1:5432/mydatabase'
-dummy_db_url_2 = 'postgres://USER:PASSWORD@HOST:PORT/NAME'
-print(django_heroku_db_url_postgres_parser(dummy_db_url_1))
-# {'user': 'mydatabaseuser', 'password': 'mypassword', 'host': '127.0.0.1', 'port': '5432', 'name': 'mydatabase'}
-print(django_heroku_db_url_postgres_parser(dummy_db_url_2))
-# {'user': 'USER', 'password': 'PASSWORD', 'host': 'HOST', 'port': 'PORT', 'name': 'NAME'}

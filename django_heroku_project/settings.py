@@ -91,6 +91,7 @@ if DEV_MODE:
         }
     }
 else:
+    # Heroku postgres db stuff
     pass
 
 # Password validation

@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import environ
 
+from custom.db_url_parser import django_heroku_db_url_postgres_parser as db_parser
+
 # Environment settings
 env = environ.Env(
     DEBUG=(bool, False)
@@ -91,8 +93,18 @@ if DEV_MODE:
         }
     }
 else:
-    # Heroku postgres db stuff
-    pass
+    DB_INFO = db_parser(os.environ['DATABASE_URL'])
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': DB_INFO['name'],
+            'USER': DB_INFO['user'],
+            'PASSWORD': DB_INFO['password'],
+            'HOST': DB_INFO['host'],
+            'PORT': DB_INFO['port'],
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

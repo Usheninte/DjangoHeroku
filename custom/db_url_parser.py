@@ -5,7 +5,7 @@ def django_heroku_db_url_postgres_parser(database_url):
     for el in db_url:  # iterate through trimmed database url
         user_ += el  # add characters to user base variable
         if el == ':':
-            break  # break at semicolon character
+            break  # break at selected character
     user = user_[:-1]  # get username from user base variable
 
     user_gap = len(user_)
@@ -15,7 +15,7 @@ def django_heroku_db_url_postgres_parser(database_url):
     for el in db_url:  # iterate through trimmed database url
         password_ += el  # add characters to password base variable
         if el == '@':
-            break  # break at semicolon character
+            break  # break at selected character
     password = password_[:-1]  # get password from password base variable
 
     password_gap = len(password_)
@@ -25,7 +25,7 @@ def django_heroku_db_url_postgres_parser(database_url):
     for el in db_url:  # iterate through trimmed database url
         host_ += el  # add characters to password base variable
         if el == ':':
-            break  # break at semicolon character
+            break  # break at selected character
     host = host_[:-1]  # get password from password base variable
 
     host_gap = len(host_)
@@ -35,7 +35,7 @@ def django_heroku_db_url_postgres_parser(database_url):
     for el in db_url:  # iterate through trimmed database url
         port_ += el  # add characters to password base variable
         if el == '/':
-            break  # break at semicolon character
+            break  # break at selected character
     port = port_[:-1]  # get password from password base variable
 
     port_gap = len(port_)

@@ -39,7 +39,7 @@ def django_heroku_db_url_postgres_parser(database_url):
     port = port_[:-1]  # get password from password base variable
 
     port_gap = len(port_)
-    db_name = db_url[port_gap:]  # reassign database name value is the string of database value minus host port
+    db_name = db_url[port_gap:]  # database name value is the string of database value minus host port
 
     return dict(user=user, password=password, host=host, port=port, name=db_name)
 

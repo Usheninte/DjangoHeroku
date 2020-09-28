@@ -1,44 +1,48 @@
-def django_heroku_db_url_postgres_parser(database_url):
+def parser_core(db_url: str, delimiter: str):
+    """ Extract key element values from a PostgreSQL database URL.
+
+    Args:
+        db_url (str): PostgreSQL database URL
+        delimiter (str): element at which to end value character extraction
+
+    Returns:
+        A new trimmed PostgreSQL database URL and the extracted element    
+    """
+
+    element_ = ""  # initialize element base variable to empty string
+    for char in db_url:  # iterate through trimmed database url
+        element_ += char  # add characters to element base variable
+        if char == delimiter:
+            break  # break at selected character
+    element = element_[:-1]  # trim element base variable
+
+    element_gap = len(element_)
+    db_url = db_url[element_gap:]  # trim database url, remove element
+
+    return db_url, element  # return database url, and element
+
+
+def django_heroku_db_url_postgres_parser(database_url: str):
+    """ Collect all necessary information from PostgreSQL database URL
+
+    Args:
+        database_url (str): PostgreSQL database URL
+
+    Returns:
+        Dictionary object holding the value of essential elements mapped to their relevant descriptive keys
+    """
+
     db_url = database_url[11:]  # remove "postgres://" from database url
 
-    user_ = ""  # initialize user base variable to empty string
-    for el in db_url:  # iterate through trimmed database url
-        user_ += el  # add characters to user base variable
-        if el == ':':
-            break  # break at selected character
-    user = user_[:-1]  # get user from user base variable
+    db_url, user = parser_core(db_url, ':')  # extract trimmed database url and user value
 
-    user_gap = len(user_)
-    db_url = db_url[user_gap:]  # reassign database url value to string minus username
+    db_url, password = parser_core(db_url, '@')  # extract trimmed database url and password value
 
-    password_ = ""  # initialize password base variable to empty string
-    for el in db_url:  # iterate through trimmed database url
-        password_ += el  # add characters to password base variable
-        if el == '@':
-            break  # break at selected character
-    password = password_[:-1]  # get password from password base variable
+    db_url, host = parser_core(db_url, ':')  # extract trimmed database url and host value
 
-    password_gap = len(password_)
-    db_url = db_url[password_gap:]  # reassign database url value to string minus password
+    db_name, port = parser_core(db_url, '/')  # extract trimmed name value and port value
 
-    host_ = ""  # initialize host base variable to empty string
-    for el in db_url:  # iterate through trimmed database url
-        host_ += el  # add characters to host base variable
-        if el == ':':
-            break  # break at selected character
-    host = host_[:-1]  # get host from host base variable
+    return dict(user=user, password=password, host=host, port=port, name=db_name)  # return mapped dictionary with values and keys for relevant elements
 
-    host_gap = len(host_)
-    db_url = db_url[host_gap:]  # reassign database url value to string minus host
 
-    port_ = ""  # initialize port base variable to empty string
-    for el in db_url:  # iterate through trimmed database url
-        port_ += el  # add characters to port base variable
-        if el == '/':
-            break  # break at selected character
-    port = port_[:-1]  # get port from port base variable
-
-    port_gap = len(port_)
-    db_name = db_url[port_gap:]  # database name value is the string of database value minus port
-
-    return dict(user=user, password=password, host=host, port=port, name=db_name)
+# postgres://USER:PASSWORD@HOST:PORT/NAME
